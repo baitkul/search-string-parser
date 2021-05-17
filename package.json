@@ -1,0 +1,27 @@
+{
+  "name": "search-string-parser",
+  "version": "1.0.0",
+  "description": "Parse search string",
+  "main": "index.js",
+  "engines": {
+    "node": ">=10"
+  },
+  "author": {
+    "name": "baitkul",
+    "email": "bakir.aitkul@protonmail.com"
+  },
+  "scripts": {
+    "test": "npx ava"
+  },
+  "files": [
+    "index.js"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "get-urls": "^10.0.0",
+    "got": "^11.8.2"
+  },
+  "devDependencies": {
+    "ava": "^3.15.0"
+  }
+}
