@@ -49,6 +49,13 @@ async function getExternalIdFromShortUrl(url, marketplace) {
     switch (marketplace) {
     case '1688':
       const url = new URL(body)
+
+      if (url.searchParams.get('url')) {
+        const innerUrl = new URL(url.searchParams.get('url'))
+        externalId = getExternalIdFromPathnameParam(innerUrl.pathname, marketplace) || false
+        break
+      }
+
       externalId = (url.searchParams.get('id') || '').split('.html').shift() || false
       break
 

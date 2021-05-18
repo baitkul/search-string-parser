@@ -14,6 +14,10 @@ test('valid search url string', async t => {
     { marketplace: '1688', externalId: '618593034309' }
   )
   t.deepEqual(
+    await searchStringParser('https://qr.1688.com/share.html?secret=xzk3VcNy'),
+    { marketplace: '1688', externalId: '606561436223' }
+  )
+  t.deepEqual(
     await searchStringParser('http://detail.m.1688.com/page/index.htm?offerId=566136916082'),
     { marketplace: '1688', externalId: '566136916082' }
   )
