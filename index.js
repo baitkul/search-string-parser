@@ -2,6 +2,10 @@ const GetUrls = require('get-urls')
 const Got = require('got')
 
 module.exports = async function searchStringParser (str) {
+  if (/^\d{5,}$/.test(str)) {
+    return { marketplace: 'taobao', externalId: str }
+  }
+
   const url = getUrlFromStr(str)
 
   if (!url) {
@@ -67,7 +71,7 @@ async function getExternalIdFromShortUrl(url, marketplace) {
       }
 
       const matchedUrl = new URL(matched[0].replace(/(var url = ')|(';)/, ''))
-      externalId = getExternalIdFromPathnameParam(matchedUrl.pathname) || false
+      externalId = matchedUrl.searchParams.get('id') || getExternalIdFromPathnameParam(matchedUrl.pathname) || false
       break
     }
 

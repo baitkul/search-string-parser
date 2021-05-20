@@ -8,7 +8,19 @@ test('plain search string', async t => {
   t.is(await searchStringParser('Смартфоны'), 'Смартфоны')
 })
 
+test('externalId search string', async t => {
+  t.deepEqual(await searchStringParser('568804690189'), { marketplace: 'taobao', externalId: '568804690189' })
+  t.deepEqual(await searchStringParser('618593034309'), { marketplace: 'taobao', externalId: '618593034309' })
+  t.deepEqual(await searchStringParser('606561436223'), { marketplace: 'taobao', externalId: '606561436223' })
+  t.deepEqual(await searchStringParser('566136916082'), { marketplace: 'taobao', externalId: '566136916082' })
+  t.deepEqual(await searchStringParser('640103352460'), { marketplace: 'taobao', externalId: '640103352460' })
+})
+
 test('valid search url string', async t => {
+  t.deepEqual(
+    await searchStringParser('https://m.tb.cn/h.4s4T1m5?sm=6fd301'),
+    { marketplace: 'taobao', externalId: '568804690189' }
+  )
   t.deepEqual(
     await searchStringParser('https://qr.1688.com/share.html?secret=0H9TOj6I'),
     { marketplace: '1688', externalId: '618593034309' }
