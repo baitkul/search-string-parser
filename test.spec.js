@@ -69,3 +69,34 @@ test('not valid search url string', async t => {
     { message: 'Invalid url' }
   )
 })
+
+test('parse opentao search url', async t => {
+  t.deepEqual(
+    await searchStringParser('https://bao.kg/item?id=580595894786'),
+    { marketplace: 'taobao', externalId: '580595894786' }
+  )
+  t.deepEqual(
+    await searchStringParser('https://bao.kg/item?id=abb-619196007205'),
+    { marketplace: '1688', externalId: '619196007205' }
+  )
+  t.deepEqual(
+    await searchStringParser('http://www.megatao.kg/item?id=607850968837'),
+    { marketplace: 'taobao', externalId: '607850968837' }
+  )
+  t.deepEqual(
+    await searchStringParser('http://bishtao.kg/item?id=621657013153'),
+    { marketplace: 'taobao', externalId: '621657013153' }
+  )
+  t.deepEqual(
+    await searchStringParser('http://bishtao.kg/item?id=abb-551112359323'),
+    { marketplace: '1688', externalId: '551112359323' }
+  )
+  t.deepEqual(
+    await searchStringParser('https://www.tao.kg/item?id=4356083394'),
+    { marketplace: 'taobao', externalId: '4356083394' }
+  )
+  t.deepEqual(
+    await searchStringParser('https://www.tao.kg/item?id=abb-1247756680'),
+    { marketplace: '1688', externalId: '1247756680' }
+  )
+})

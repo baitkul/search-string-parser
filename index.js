@@ -12,6 +12,16 @@ module.exports = async function searchStringParser (str) {
     return str
   }
 
+  if (url.hostname.endsWith('.kg')) {
+    const result = parseOpentaoUrl(url)
+
+    if (!result) {
+      throw new Error('Invalid url')
+    }
+
+    return result
+  }
+
   let marketplace = getMarketplaceFromUrl(url)
 
   if (!marketplace) {
@@ -31,6 +41,19 @@ module.exports = async function searchStringParser (str) {
   if (!externalId) {
     throw new Error('Invalid url')
   }
+
+  return { marketplace, externalId }
+}
+
+function parseOpentaoUrl(url) {
+  const id = url.searchParams.get('id')
+
+  if (!id) {
+    return false
+  }
+
+  const marketplace = id.startsWith('abb-') ? '1688' : 'taobao'
+  const externalId = id.replace(/\D/g, '')
 
   return { marketplace, externalId }
 }
